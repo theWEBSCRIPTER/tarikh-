@@ -125,6 +125,25 @@ if (qlist[q].a == "") {
 }
   document.querySelector("section").innerHTML += `<div class="wrapper"><div class="q"><span style="color:teal">سوال نمبر ${Number(q)+1}: </span>${qlist[q].q}</div><div class="a"><b>جواب:</b> ${qlist[q].a}</div></div>`
 }
+async function font() {
+  const r = new XMLHttpRequest();
+  r.open("GET","./noto.ttf");
+  r.addEventListener("loadend",()=> {
+  let css = document.createElement("style")
+  css.innerHTML = `@font-face {
+  font-family: "Mehr";
+  src: url(./noto.ttf);
+}
+section .wrapper .a {
+  font-size: 13px;
+  line-height: 32px;
+  font-family: "Mehr";
+}`
+    document.head.appendChild(css)
+  })
+  r.send()
+}
+font()
 document.querySelectorAll("div.q").forEach(d=>{
   d.addEventListener("click", function (e){
     let t = event.target
